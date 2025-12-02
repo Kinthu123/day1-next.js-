@@ -43,7 +43,9 @@ export default function RootLayout({
           distortion={0.01}
           />
         </div>
-        {children}
+        <main>
+          {children}
+        </main>
       </body>
     </html>
   );

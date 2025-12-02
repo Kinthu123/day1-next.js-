@@ -3,12 +3,10 @@ import Image from 'next/image';
 
 const ExploreBtn = () => {
   return (
-    <button type="button" id="explore-btn" className="mt-8 mx-auto" onClick={()=> console.log('Click')}>
-        <a href="#events">
+    <a href="#events" id="explore-btn" className="mt-8 mx-auto flex items-center gap-2" onClick={()=> console.log('Click')}>
             Explore Events
             <Image src="/icons/arrow-down.svg" alt="arrow-down" width={24} height={24} />
-          </a>
-        </button>
+    </a>
   )
 }
 
