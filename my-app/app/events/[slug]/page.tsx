@@ -2,9 +2,11 @@ import { notFound } from "next/navigation";
 import Image from 'next/image';
 import BookEvent from "@/components/BookEvent";
 import { IEvent } from "@/database/event.model";
-import { getSimilarEventsBySlug } from "@/lib/actions/event.actions";
+import { getSimilarEventsBySlug, getEventBySlug } from "@/lib/actions/event.actions";
 import EventCard from "@/components/EventCard";
 
+
+export const dynamic = 'force-dynamic';
 
 const EventDetailsItem = ({icon,alt,label}: {icon: string, alt: string, label: string}) => (
   <div className="flex-row-gap-2 items-center">
@@ -44,12 +46,8 @@ const EventDetailsPage = async({params} : {params: Promise<{slug: string}>}) => 
   const { slug } = await params;
   const similarEvents = await getSimilarEventsBySlug(slug);
   console.log('Page similarEvents:', similarEvents);
-  const request = await fetch(`${BASE_URL}/api/events/${slug}`);
+  const event = await getEventBySlug(slug);
 
-  
-  if (!request.ok) return notFound();
-
-  const { event } = await request.json();
 
   if (!event) return notFound();
 
@@ -119,7 +117,7 @@ const EventDetailsPage = async({params} : {params: Promise<{slug: string}>}) => 
   <h2>Similar Events</h2>
   <div className="events">
     {similarEvents.length > 0 && similarEvents.map((similarEvent: IEvent)=>(
-      <EventCard key={similarEvent._id as string} {...similarEvent}/>
+      <EventCard key={similarEvent._id as unknown as string} {...similarEvent}/>
     ))}
 
   </div>
