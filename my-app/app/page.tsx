@@ -2,6 +2,8 @@ import ExploreBtn from "@/components/ExploreBtn"
 import EventList from "@/components/EventList"
 import { Suspense } from "react";
 
+export const dynamic = 'force-dynamic';
+
 export default function Page() {
   return (
     <section>
